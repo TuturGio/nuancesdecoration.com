@@ -38,19 +38,19 @@ export default function Contact() {
 
       if (dbError) throw dbError;
 
-      const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`;
-      const response = await fetch(functionUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      const { data: emailResult, error: emailError } = await supabase.functions.invoke(
+        "send-contact-email",
+        {
+          body: { name, email, phone, appointment_type: appointmentType, message },
         },
-        body: JSON.stringify({ name, email, phone, appointment_type: appointmentType, message }),
-      });
+      );
 
-      if (!response.ok) {
-        const body = await response.json().catch(() => ({}));
-        throw new Error(body.error || "L'envoi de l'email a échoué.");
+      if (emailError) {
+        throw new Error("L'envoi de l'email a échoué. Veuillez réessayer.");
+      }
+
+      if (!emailResult || emailResult.success !== true) {
+        throw new Error("L'envoi de l'email a échoué. Veuillez réessayer.");
       }
 
       setSubmitState("success");
