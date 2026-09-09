@@ -87,7 +87,7 @@ export default function Navigation() {
 
         <Link
           to="/contact"
-          className="hidden md:inline-block font-['MaisonNeue'] font-light text-[12px] tracking-[2.5px] uppercase text-[var(--linen)] bg-[var(--moka)] border-none py-3 px-6 cursor-pointer no-underline transition-colors hover:bg-[var(--charcoal)]"
+          className="hidden md:inline-block font-['MaisonNeue'] font-bold text-[12px] tracking-[2.5px] uppercase text-[var(--linen)] bg-[var(--moka)] border-none py-3 px-6 cursor-pointer no-underline transition-colors hover:bg-[var(--charcoal)]"
         >
           Prendre rendez-vous
         </Link>
@@ -176,7 +176,7 @@ export default function Navigation() {
               <Link
                 to="/contact"
                 onClick={() => setShowMobileMenu(false)}
-                className="block text-center font-['MaisonNeue'] font-light text-[11px] tracking-[2px] uppercase text-[var(--linen)] bg-[var(--moka)] border-none py-3 px-6 cursor-pointer no-underline transition-colors"
+                className="block text-center font-['MaisonNeue'] font-bold text-[11px] tracking-[2px] uppercase text-[var(--linen)] bg-[var(--moka)] border-none py-3 px-6 cursor-pointer no-underline transition-colors"
               >
                 Prendre rendez-vous
               </Link>

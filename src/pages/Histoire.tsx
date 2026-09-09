@@ -140,7 +140,7 @@ export default function Histoire() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             to="/contact"
-            className="inline-block font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase text-[var(--moka)] bg-[var(--linen)] py-4 px-10 no-underline transition-colors hover:bg-white"
+            className="inline-block font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase text-[var(--moka)] bg-[var(--linen)] py-4 px-10 no-underline transition-colors hover:bg-white"
           >
             Prendre rendez-vous
           </Link>

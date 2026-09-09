@@ -86,7 +86,7 @@ export default function Showroom() {
               </p>
               <Link
                 to="/contact"
-                className="inline-block mt-5 font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--charcoal)]"
+                className="inline-block mt-5 font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--charcoal)]"
               >
                 Prendre rendez-vous
               </Link>
@@ -185,7 +185,7 @@ export default function Showroom() {
         </p>
         <Link
           to="/contact"
-          className="inline-block font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase text-[var(--moka)] bg-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--pale)]"
+          className="inline-block font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase text-[var(--moka)] bg-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--pale)]"
         >
           Prendre rendez-vous
         </Link>

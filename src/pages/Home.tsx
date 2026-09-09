@@ -343,7 +343,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/contact"
-              className="inline-block font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-10 no-underline transition-colors hover:bg-[var(--charcoal)]"
+              className="inline-block font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-10 no-underline transition-colors hover:bg-[var(--charcoal)]"
             >
               Prendre rendez-vous
             </Link>
@@ -362,7 +362,7 @@ export default function Home() {
       <div className="bg-white py-10 flex justify-center">
         <Link
           to="/contact"
-          className="inline-block font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-12 no-underline transition-colors hover:bg-[var(--charcoal)]"
+          className="inline-block font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-12 no-underline transition-colors hover:bg-[var(--charcoal)]"
         >
           Prendre rendez-vous
         </Link>
@@ -453,7 +453,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/contact"
-            className="inline-block font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-10 no-underline transition-colors hover:bg-[var(--charcoal)]"
+            className="inline-block font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-10 no-underline transition-colors hover:bg-[var(--charcoal)]"
           >
             Prendre rendez-vous
           </Link>

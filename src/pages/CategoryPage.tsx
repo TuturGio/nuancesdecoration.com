@@ -70,7 +70,7 @@ export default function CategoryPage({
             <div className="flex-none md:w-64 flex flex-col gap-4 md:pt-10">
               <Link
                 to="/contact"
-                className="text-center font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--charcoal)]"
+                className="text-center font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase bg-[var(--moka)] text-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--charcoal)]"
               >
                 Prendre rendez-vous
               </Link>
@@ -93,7 +93,7 @@ export default function CategoryPage({
         </h2>
         <Link
           to="/contact"
-          className="inline-block font-['MaisonNeue'] font-light text-[10px] tracking-[3px] uppercase text-[var(--moka)] bg-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--pale)]"
+          className="inline-block font-['MaisonNeue'] font-bold text-[10px] tracking-[3px] uppercase text-[var(--moka)] bg-[var(--linen)] py-4 px-8 no-underline transition-colors hover:bg-[var(--pale)]"
         >
           Prendre rendez-vous
         </Link>
