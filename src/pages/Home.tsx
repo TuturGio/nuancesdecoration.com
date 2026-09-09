@@ -88,6 +88,7 @@ function StepsCarousel() {
             </div>
             <div className="px-8 py-8 flex flex-col flex-1 bg-[var(--grege-p)]">
               <div className="w-6 h-[1px] bg-[var(--primary)] mb-4"></div>
+              <span className="font-['MaisonNeue'] font-light text-[11px] tracking-[2px] text-[var(--primary)] mb-2">{step.number}</span>
               <h3 className="font-['FreeSerif'] font-black text-[18px] text-[var(--moka)] mb-3 leading-tight">
                 {step.label}
               </h3>
@@ -131,6 +132,7 @@ function StepsCarousel() {
               </div>
               <div className="px-4 py-5 flex flex-col bg-[var(--grege-p)]">
                 <div className="w-5 h-[1px] bg-[var(--primary)] mb-3"></div>
+                <span className="font-['MaisonNeue'] font-light text-[10px] tracking-[2px] text-[var(--primary)] mb-1">{step.number}</span>
                 <h3 className="font-['FreeSerif'] font-black text-[14px] text-[var(--moka)] mb-2 leading-tight">
                   {step.label}
                 </h3>
