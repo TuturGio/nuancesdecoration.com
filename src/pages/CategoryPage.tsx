@@ -49,7 +49,7 @@ export default function CategoryPage({
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
             <div className="flex-1">
-              <h3 className="font-['MaisonNeue'] font-light text-[11px] tracking-[3px] uppercase text-[var(--primary)] mb-6">
+              <h3 className="font-['FreeSerif'] font-black text-[40px] text-[var(--moka)] leading-[1.1] mb-6">
                 Nos prestations
               </h3>
               <ul className="space-y-4">
