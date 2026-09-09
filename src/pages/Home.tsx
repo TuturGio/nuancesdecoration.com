@@ -6,7 +6,7 @@ const steps = [
   {
     number: '1',
     label: 'Conseils à domicile',
-    description: 'En showroom ou à domicile, venez découvrir nos collections, parcourir nos échantillons et échanger sur votre projet. Sur rendez-vous ou en visite libre, nous vous guidons pour définir vos envies, votre style et les meilleures solutions pour votre intérieur.',
+    description: 'En showroom ou à domicile, venez découvrir nos collections, parcourir nos échantillons et échanger sur votre projet.',
     image: `${import.meta.env.BASE_URL}conseil-domicile.jpg`,
   },
   {
@@ -89,7 +89,7 @@ function StepsCarousel() {
             <div className="px-8 py-8 flex flex-col flex-1 bg-[var(--grege-p)]">
               <div className="w-6 h-[1px] bg-[var(--primary)] mb-4"></div>
               <span className="font-['MaisonNeue'] font-light text-[11px] tracking-[2px] text-[var(--primary)] mb-2">{step.number}</span>
-              <h3 className="font-['FreeSerif'] font-black text-[18px] text-[var(--moka)] mb-3 leading-tight">
+              <h3 className="font-['FreeSerif'] font-black text-[21px] text-[var(--moka)] mb-3 leading-tight">
                 {step.label}
               </h3>
               <p className="font-['MaisonNeue'] font-light text-[12px] text-[var(--warm)] leading-[1.85] flex-1">
@@ -133,7 +133,7 @@ function StepsCarousel() {
               <div className="px-4 py-5 flex flex-col bg-[var(--grege-p)]">
                 <div className="w-5 h-[1px] bg-[var(--primary)] mb-3"></div>
                 <span className="font-['MaisonNeue'] font-light text-[10px] tracking-[2px] text-[var(--primary)] mb-1">{step.number}</span>
-                <h3 className="font-['FreeSerif'] font-black text-[14px] text-[var(--moka)] mb-2 leading-tight">
+                <h3 className="font-['FreeSerif'] font-black text-[17px] text-[var(--moka)] mb-2 leading-tight">
                   {step.label}
                 </h3>
                 <p className="font-['MaisonNeue'] font-light text-[11px] text-[var(--warm)] leading-[1.8]">
