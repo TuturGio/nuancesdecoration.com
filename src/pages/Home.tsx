@@ -281,7 +281,7 @@ export default function Home() {
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
-              className={`px-4 py-2 rounded-full font-['MaisonNeue'] font-light text-[10px] tracking-[1.5px] uppercase whitespace-nowrap transition-all border ${
+              className={`px-4 py-2 rounded-none font-['MaisonNeue'] font-light text-[10px] tracking-[1.5px] uppercase whitespace-nowrap transition-all border ${
                 currentSlide === i
                   ? 'bg-[var(--moka)] text-[var(--linen)] border-[var(--moka)]'
                   : 'bg-transparent text-[var(--warm)] border-[var(--warm)] hover:border-[var(--moka)] hover:text-[var(--moka)]'
