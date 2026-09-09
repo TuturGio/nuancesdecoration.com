@@ -208,10 +208,10 @@ export default function Contact() {
               </h2>
 
               {/* Coordonnées en 2 colonnes */}
-              <div className="grid grid-cols-2 gap-x-8 gap-y-7 mb-8">
-                <div className="flex gap-3">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-7 mb-8">
+                <div className="flex gap-3 min-w-0">
                   <MapPin size={18} className="text-[var(--primary)] flex-shrink-0 mt-[3px]" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-['MaisonNeue'] font-light text-[10px] tracking-[2px] uppercase text-[var(--primary)] mb-1">
                       Adresse
                     </p>
@@ -225,23 +225,23 @@ export default function Contact() {
 
                 <div className="flex gap-3">
                   <Clock size={18} className="text-[var(--primary)] flex-shrink-0 mt-[3px]" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-['MaisonNeue'] font-light text-[10px] tracking-[2px] uppercase text-[var(--primary)] mb-1">
                       Horaires
                     </p>
                     <p className="font-['MaisonNeue'] font-light text-[13px] text-[var(--warm)] leading-[1.7]">
-                      Lun – Ven : 9h00 – 18h00
+                      <span className="whitespace-nowrap">Lun – Ven : 9h00 – 18h00</span>
                       <br />
-                      Samedi : sur rendez-vous
+                      <span className="whitespace-nowrap">Samedi : sur rendez-vous</span>
                       <br />
-                      Dimanche : Fermé
+                      <span className="whitespace-nowrap">Dimanche : Fermé</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 min-w-0">
                   <Phone size={18} className="text-[var(--primary)] flex-shrink-0 mt-[3px]" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-['MaisonNeue'] font-light text-[10px] tracking-[2px] uppercase text-[var(--primary)] mb-1">
                       Téléphone
                     </p>
@@ -251,13 +251,13 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 min-w-0">
                   <Mail size={18} className="text-[var(--primary)] flex-shrink-0 mt-[3px]" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="font-['MaisonNeue'] font-light text-[10px] tracking-[2px] uppercase text-[var(--primary)] mb-1">
                       Email
                     </p>
-                    <p className="font-['MaisonNeue'] font-light text-[13px] text-[var(--warm)] leading-[1.7]">
+                    <p className="font-['MaisonNeue'] font-light text-[13px] text-[var(--warm)] leading-[1.7] break-all">
                       contact@nuancesdecoration.com
                     </p>
                   </div>
