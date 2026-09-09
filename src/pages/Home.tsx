@@ -183,13 +183,13 @@ export default function Home() {
     },
     {
       title: 'Indoor',
-      subtitle: 'Banquettes & linge de maison',
+      subtitle: 'Banquettes, coussins & Linge de maison',
       image: `${import.meta.env.BASE_URL}linge_maison.jpg`,
       link: '/realisations/banquettes',
     },
     {
       title: 'Outdoor',
-      subtitle: 'Banquettes, coussins & transats',
+      subtitle: 'Banquettes, coussins & transat',
       image: `${import.meta.env.BASE_URL}outdoor-home.jpg`,
       link: '/realisations/bateaux',
     },
@@ -244,9 +244,7 @@ export default function Home() {
                   <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-110" />
                   <div className="absolute bottom-7 left-7 right-7 z-[2]">
                     <h3 className="font-['FreeSerif'] font-black text-[30px] text-[var(--linen)] leading-[1.1] mb-[5px]">
-                      {s.title === 'Rideaux' ? (
-                        <>Nos<br />{s.title}</>
-                      ) : s.title}
+                      {s.title}
                     </h3>
                     <p className="font-['MaisonNeue'] font-normal text-[8px] tracking-[3px] uppercase text-[var(--linen)]">
                       {s.subtitle}
