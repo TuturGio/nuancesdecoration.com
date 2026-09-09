@@ -107,10 +107,10 @@ export default function Navigation() {
             <li>
               <button
                 onClick={() => setShowMobileDropdown(!showMobileDropdown)}
-                className="w-full text-left font-['MaisonNeue'] font-light text-[11px] tracking-[2px] uppercase text-[var(--moka)] no-underline transition-colors flex items-center justify-between bg-transparent border-none cursor-pointer py-2"
+                className="w-full text-left font-['MaisonNeue'] font-light text-[11px] tracking-[2px] uppercase text-[var(--moka)] no-underline transition-colors flex items-center justify-start gap-2 bg-transparent border-none cursor-pointer py-2"
               >
                 Nos réalisations
-                <ChevronDown size={14} className={`transition-transform ${showMobileDropdown ? 'rotate-180' : ''}`} />
+                <ChevronDown size={19} strokeWidth={2.2} className={`transition-transform ${showMobileDropdown ? 'rotate-180' : ''}`} />
               </button>
               {showMobileDropdown && (
                 <div className="pl-4 mt-2 space-y-2">
