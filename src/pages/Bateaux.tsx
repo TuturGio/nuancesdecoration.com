@@ -7,14 +7,14 @@ export default function Bateaux() {
     <CategoryPage
       title="Outdoor & Bateaux"
       subtitle="Sellerie nautique"
-      description="Notre expertise en sellerie nautique répond aux exigences les plus élevées du yachting. Nous créons des revêtements et aménagements sur mesure qui résistent aux conditions marines tout en offrant un confort et une élégance exceptionnels. Chaque création est pensée pour allier technicité, durabilité et raffinement."
+      description="Donnez vie à vos espaces extérieurs avec des réalisations textiles entièrement sur mesure. Banquettes, coussins, bains de soleil, ou encore transats : nous concevons chaque projet dans notre atelier, en vous proposant une large sélection de tissus techniques et étanches spécialement conçus pour l'extérieur."
       features={[
-        'Tissus techniques résistants aux UV et à l\'humidité',
-        'Conception adaptée aux contraintes marines',
-        'Coussins et matelas nautiques sur mesure',
-        'Housses de protection et bâches',
-        'Rideaux et voilages pour cabines',
-        'Rénovation et réfection complète de sellerie',
+        'Banquettes d\'extérieur',
+        'Coussins de salon de jardin',
+        'Bains de soleil & transats',
+        'Mousses sur mesure',
+        'Large sélection de tissus traités pour l\'extérieur : résistants aux UV, intempéries, imperméables, étanches...',
+        'Conseil personnalisés style et finitions',
       ]}
       heroImage={`${import.meta.env.BASE_URL}outdoor-cat.jpg`}
       heroDraw={drawNautical}
