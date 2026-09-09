@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, CalendarDays } from 'lucide-react';
 
 const categories = [
   { label: 'Rideaux', subtitle: 'Décoratifs & occultants', link: '/realisations/rideaux' },
@@ -92,13 +92,22 @@ export default function Navigation() {
           Prendre rendez-vous
         </Link>
 
-        <button
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
-          className="md:hidden bg-transparent border-none cursor-pointer text-[var(--moka)] p-2"
-          aria-label="Menu"
-        >
-          {showMobileMenu ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <Link
+            to="/contact"
+            className="bg-transparent border-none cursor-pointer text-[var(--moka)] p-2 flex items-center"
+            aria-label="Prendre rendez-vous"
+          >
+            <CalendarDays size={24} />
+          </Link>
+          <button
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            className="bg-transparent border-none cursor-pointer text-[var(--moka)] p-2"
+            aria-label="Menu"
+          >
+            {showMobileMenu ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {showMobileMenu && (
