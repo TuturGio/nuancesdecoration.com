@@ -47,11 +47,14 @@ export default function CategoryPage({
 
       <section className="px-8 md:px-12 py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="font-['FreeSerif'] font-black text-[40px] text-[var(--moka)] leading-[1.1] mb-4">
+              Nos prestations
+            </h3>
+            <div className="w-12 h-[1px] bg-[var(--primary)] mx-auto"></div>
+          </div>
           <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
             <div className="flex-1">
-              <h3 className="font-['FreeSerif'] font-black text-[40px] text-[var(--moka)] leading-[1.1] mb-6">
-                Nos prestations
-              </h3>
               <ul className="space-y-4">
                 {features.map((feature, i) => (
                   <li
