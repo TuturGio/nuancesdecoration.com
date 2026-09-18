@@ -36,19 +36,23 @@ export default function Contact() {
         message,
       });
 
-      if (dbError) throw dbError;
+      if (dbError) {
+        throw new Error("Votre demande n'a pas pu être enregistrée. Veuillez réessayer.");
+      }
 
       setSubmitState("success");
       form.reset();
       setAppointmentType("");
 
-      supabase.functions.invoke("send-contact-email", {
+      void supabase.functions.invoke("send-contact-email", {
         body: { name, email, phone, appointment_type: appointmentType, message },
-      }).catch(() => {});
+      });
     } catch (err) {
       setSubmitState("error");
       setErrorMessage(
-        err instanceof Error ? err.message : "Une erreur inattendue s'est produite.",
+        err instanceof Error && err.message
+          ? err.message
+          : "Votre demande n'a pas pu être enregistrée. Veuillez réessayer.",
       );
     }
   };
