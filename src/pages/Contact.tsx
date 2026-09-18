@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
 import { MapPin, Phone, Mail, Clock, Info, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-import { supabase, isSupabaseConfigured } from "../lib/supabase";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -21,22 +20,39 @@ export default function Contact() {
     const phone = String(formData.get("phone") || "");
     const message = String(formData.get("message") || "");
 
-    if (!isSupabaseConfigured) {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
       setSubmitState("error");
       setErrorMessage("Le formulaire de contact n'est pas disponible pour le moment. Veuillez nous appeler ou envoyer un email directement.");
       return;
     }
 
     try {
-      const { error: dbError } = await supabase.from("contact_messages").insert({
-        name,
-        email,
-        phone,
-        appointment_type: appointmentType,
-        message,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/contact_messages`,
+        {
+          method: "POST",
+          headers: {
+            "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            appointment_type: appointmentType,
+            message,
+          }),
+        },
+      );
 
-      if (dbError) {
+      if (!response.ok) {
+        const errText = await response.text().catch(() => "");
+        console.error("DB insert failed:", response.status, errText);
         throw new Error("Votre demande n'a pas pu être enregistrée. Veuillez réessayer.");
       }
 
@@ -44,16 +60,25 @@ export default function Contact() {
       form.reset();
       setAppointmentType("");
 
-      void supabase.functions.invoke("send-contact-email", {
-        body: {
-          name,
-          email,
-          phone,
-          appointment_type: appointmentType,
-          message,
-          skip_save: true,
+      void fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
+        {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            appointment_type: appointmentType,
+            message,
+            skip_save: true,
+          }),
         },
-      });
+      ).catch(() => {});
     } catch (err) {
       setSubmitState("error");
       setErrorMessage(
