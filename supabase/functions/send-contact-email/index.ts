@@ -75,7 +75,7 @@ Deno.serve(async (req: Request) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Nuances Décoration <contact@nuancesdecoration.com>",
+        from: "Nuances Décoration <onboarding@resend.dev>",
         to: RECIPIENT_EMAIL,
         reply_to: email,
         subject: `Nouvelle demande de rendez-vous — ${name}`,

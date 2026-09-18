@@ -38,24 +38,13 @@ export default function Contact() {
 
       if (dbError) throw dbError;
 
-      const { data: emailResult, error: emailError } = await supabase.functions.invoke(
-        "send-contact-email",
-        {
-          body: { name, email, phone, appointment_type: appointmentType, message },
-        },
-      );
-
-      if (emailError) {
-        throw new Error("L'envoi de l'email a échoué. Veuillez réessayer.");
-      }
-
-      if (!emailResult || emailResult.success !== true) {
-        throw new Error("L'envoi de l'email a échoué. Veuillez réessayer.");
-      }
-
       setSubmitState("success");
       form.reset();
       setAppointmentType("");
+
+      supabase.functions.invoke("send-contact-email", {
+        body: { name, email, phone, appointment_type: appointmentType, message },
+      }).catch(() => {});
     } catch (err) {
       setSubmitState("error");
       setErrorMessage(
