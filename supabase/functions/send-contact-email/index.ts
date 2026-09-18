@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -47,6 +48,34 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+    if (!supabaseUrl || !serviceRoleKey) {
+      return new Response(
+        JSON.stringify({ error: "Configuration manquante." }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+    const { error: dbError } = await supabase.from("contact_messages").insert({
+      name,
+      email,
+      phone,
+      appointment_type: appointmentType,
+      message,
+    });
+
+    if (dbError) {
+      console.error("DB insert error:", dbError.message);
+      return new Response(
+        JSON.stringify({ error: "Votre demande n'a pas pu être enregistrée." }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
     const emailHtml = `
       <h2 style="font-family: Georgia, serif; color: #6B4E3D;">Nouvelle demande de rendez-vous</h2>
       <table style="font-family: Arial, sans-serif; font-size: 14px; color: #333; border-collapse: collapse;">
@@ -61,35 +90,27 @@ Deno.serve(async (req: Request) => {
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
-    if (!RESEND_API_KEY) {
-      return new Response(
-        JSON.stringify({ error: "Le service d'envoi d'email n'est pas configuré." }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
-    }
+    if (RESEND_API_KEY) {
+      const resendResponse = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "Nuances Décoration <onboarding@resend.dev>",
+          to: RECIPIENT_EMAIL,
+          reply_to: email,
+          subject: `Nouvelle demande de rendez-vous — ${name}`,
+          html: emailHtml,
+        }),
+      });
 
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Nuances Décoration <onboarding@resend.dev>",
-        to: RECIPIENT_EMAIL,
-        reply_to: email,
-        subject: `Nouvelle demande de rendez-vous — ${name}`,
-        html: emailHtml,
-      }),
-    });
-
-    if (!resendResponse.ok) {
-      const errorBody = await resendResponse.text();
-      console.error("Resend error:", errorBody);
-      return new Response(
-        JSON.stringify({ error: "L'envoi de l'email a échoué." }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
+      if (!resendResponse.ok) {
+        console.error("Resend error:", await resendResponse.text());
+      }
+    } else {
+      console.warn("RESEND_API_KEY not configured — skipping email send");
     }
 
     return new Response(
