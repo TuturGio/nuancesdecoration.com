@@ -28,33 +28,38 @@ export default function Contact() {
     }
 
     try {
-      const { data, error: fnError } = await supabase.functions.invoke(
-        "send-contact-email",
-        { body: { name, email, phone, appointment_type: appointmentType, message } },
-      );
+      const { error: dbError } = await supabase.from("contact_messages").insert({
+        name,
+        email,
+        phone,
+        appointment_type: appointmentType,
+        message,
+      });
 
-      if (fnError) {
-        console.error("Edge function error:", fnError);
-        throw new Error("Le service est momentanément indisponible. Veuillez réessayer.");
-      }
-
-      if (!data || data.success !== true) {
-        const msg =
-          data && typeof data.error === "string" && data.error
-            ? data.error
-            : "Le service est momentanément indisponible. Veuillez réessayer.";
-        throw new Error(msg);
+      if (dbError) {
+        throw new Error("Votre demande n'a pas pu être enregistrée. Veuillez réessayer.");
       }
 
       setSubmitState("success");
       form.reset();
       setAppointmentType("");
+
+      void supabase.functions.invoke("send-contact-email", {
+        body: {
+          name,
+          email,
+          phone,
+          appointment_type: appointmentType,
+          message,
+          skip_save: true,
+        },
+      });
     } catch (err) {
       setSubmitState("error");
       setErrorMessage(
         err instanceof Error && err.message
           ? err.message
-          : "Le service est momentanément indisponible. Veuillez réessayer.",
+          : "Votre demande n'a pas pu être enregistrée. Veuillez réessayer.",
       );
     }
   };

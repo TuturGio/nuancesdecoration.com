@@ -59,33 +59,35 @@ Deno.serve(async (req: Request) => {
     }
 
     // Insert via REST API directly — no npm dependency needed
-    const insertResponse = await fetch(
-      `${supabaseUrl}/rest/v1/contact_messages`,
-      {
-        method: "POST",
-        headers: {
-          "apikey": serviceRoleKey,
-          "Authorization": `Bearer ${serviceRoleKey}`,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal",
+    if (body.skip_save !== true) {
+      const insertResponse = await fetch(
+        `${supabaseUrl}/rest/v1/contact_messages`,
+        {
+          method: "POST",
+          headers: {
+            "apikey": serviceRoleKey,
+            "Authorization": `Bearer ${serviceRoleKey}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            appointment_type: appointmentType,
+            message,
+          }),
         },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          appointment_type: appointmentType,
-          message,
-        }),
-      },
-    );
-
-    if (!insertResponse.ok) {
-      const errBody = await insertResponse.text();
-      console.error("DB insert error:", insertResponse.status, errBody);
-      return new Response(
-        JSON.stringify({ error: "Votre demande n'a pas pu être enregistrée." }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
+
+      if (!insertResponse.ok) {
+        const errBody = await insertResponse.text();
+        console.error("DB insert error:", insertResponse.status, errBody);
+        return new Response(
+          JSON.stringify({ error: "Votre demande n'a pas pu être enregistrée." }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
     }
 
     // Send email — failure here does not block the saved record
