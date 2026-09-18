@@ -34,14 +34,16 @@ export default function Contact() {
       );
 
       if (fnError) {
+        console.error("Edge function error:", fnError);
         throw new Error("Le service est momentanément indisponible. Veuillez réessayer.");
       }
 
       if (!data || data.success !== true) {
-        throw new Error(
-          (data && typeof data.error === "string" && data.error) ||
-            "Le service est momentanément indisponible. Veuillez réessayer.",
-        );
+        const msg =
+          data && typeof data.error === "string" && data.error
+            ? data.error
+            : "Le service est momentanément indisponible. Veuillez réessayer.";
+        throw new Error(msg);
       }
 
       setSubmitState("success");
