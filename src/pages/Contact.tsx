@@ -20,21 +20,16 @@ export default function Contact() {
     const phone = String(formData.get("phone") || "");
     const message = String(formData.get("message") || "");
 
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-    if (!supabaseUrl || !supabaseKey) {
+    if (!supabaseKey) {
       setSubmitState("error");
       setErrorMessage("Le formulaire de contact n'est pas disponible pour le moment. Veuillez nous appeler ou envoyer un email directement.");
       return;
     }
 
-    const restBase = import.meta.env.DEV
-      ? "/api/rest/v1"
-      : `${supabaseUrl}/rest/v1`;
-    const fnBase = import.meta.env.DEV
-      ? "/api/functions/v1"
-      : `${supabaseUrl}/functions/v1`;
+    const restBase = "/api/rest/v1";
+    const fnBase = "/api/functions/v1";
 
     try {
       const response = await fetch(
