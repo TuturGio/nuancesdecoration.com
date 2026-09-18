@@ -41,4 +41,18 @@ export default defineConfig({
   optimizeDeps: {
     exclude: [],
   },
+  server: {
+    proxy: {
+      '/api/rest': {
+        target: 'https://kqiggndvkekcbbjbirue.supabase.co',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/rest/, '/rest'),
+      },
+      '/api/functions': {
+        target: 'https://kqiggndvkekcbbjbirue.supabase.co',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/functions/, '/functions'),
+      },
+    },
+  },
 });

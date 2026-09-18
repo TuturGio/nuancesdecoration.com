@@ -29,14 +29,21 @@ export default function Contact() {
       return;
     }
 
+    const restBase = import.meta.env.DEV
+      ? "/api/rest/v1"
+      : `${supabaseUrl}/rest/v1`;
+    const fnBase = import.meta.env.DEV
+      ? "/api/functions/v1"
+      : `${supabaseUrl}/functions/v1`;
+
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/contact_messages`,
+        `${restBase}/contact_messages`,
         {
           method: "POST",
           headers: {
-            "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
-            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            "apikey": supabaseKey,
+            "Authorization": `Bearer ${supabaseKey}`,
             "Content-Type": "application/json",
             "Prefer": "return=minimal",
           },
@@ -61,12 +68,12 @@ export default function Contact() {
       setAppointmentType("");
 
       void fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
+        `${fnBase}/send-contact-email`,
         {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${supabaseKey}`,
+            "apikey": supabaseKey,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
