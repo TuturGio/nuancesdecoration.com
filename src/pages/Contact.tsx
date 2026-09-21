@@ -21,48 +21,22 @@ export default function Contact() {
     const message = String(formData.get("message") || "");
 
     const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
-    if (!supabaseKey) {
+    if (!supabaseKey || !supabaseUrl) {
       setSubmitState("error");
       setErrorMessage("Le formulaire de contact n'est pas disponible pour le moment. Veuillez nous appeler ou envoyer un email directement.");
       return;
     }
 
-    const restBase = "/api/rest/v1";
-    const fnBase = "/api/functions/v1";
+    // In dev/preview, use the Vite proxy to avoid CORS issues.
+    // In production (static hosting), call Supabase directly — the edge function has CORS *.
+    const fnBase = import.meta.env.DEV
+      ? "/api/functions/v1"
+      : `${supabaseUrl}/functions/v1`;
 
     try {
       const response = await fetch(
-        `${restBase}/contact_messages`,
-        {
-          method: "POST",
-          headers: {
-            "apikey": supabaseKey,
-            "Authorization": `Bearer ${supabaseKey}`,
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            phone,
-            appointment_type: appointmentType,
-            message,
-          }),
-        },
-      );
-
-      if (!response.ok) {
-        const errText = await response.text().catch(() => "");
-        console.error("DB insert failed:", response.status, errText);
-        throw new Error(`Erreur (${response.status}): ${errText || "Réponse invalide"}`);
-      }
-
-      setSubmitState("success");
-      form.reset();
-      setAppointmentType("");
-
-      void fetch(
         `${fnBase}/send-contact-email`,
         {
           method: "POST",
@@ -77,10 +51,24 @@ export default function Contact() {
             phone,
             appointment_type: appointmentType,
             message,
-            skip_save: true,
           }),
         },
-      ).catch(() => {});
+      );
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => "");
+        console.error("Contact form failed:", response.status, errText);
+        throw new Error("Votre demande n'a pas pu être enregistrée. Veuillez réessayer.");
+      }
+
+      const result = await response.json().catch(() => ({}));
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      setSubmitState("success");
+      form.reset();
+      setAppointmentType("");
     } catch (err) {
       setSubmitState("error");
       setErrorMessage(
