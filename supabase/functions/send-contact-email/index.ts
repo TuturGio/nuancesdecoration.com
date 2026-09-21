@@ -7,6 +7,7 @@ const corsHeaders = {
 };
 
 const RECIPIENT_EMAIL = "contact@nuancesdecoration.com";
+const FALLBACK_RECIPIENT = "agiocanti@instagrume.com";
 
 const escapeHtml = (value: string) =>
   value.replace(
@@ -114,7 +115,7 @@ Deno.serve(async (req: Request) => {
         },
         body: JSON.stringify({
           from: "Nuances Décoration <onboarding@resend.dev>",
-          to: RECIPIENT_EMAIL,
+          to: FALLBACK_RECIPIENT,
           reply_to: email,
           subject: `Nouvelle demande de rendez-vous — ${name}`,
           html: emailHtml,
@@ -122,10 +123,27 @@ Deno.serve(async (req: Request) => {
       });
 
       if (!resendResponse.ok) {
-        console.error("Resend error:", await resendResponse.text());
+        const resendError = await resendResponse.text();
+        console.error("Resend error:", resendResponse.status, resendError);
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: "Votre demande a bien été enregistrée.",
+            email_error: `Email non envoyé (${resendResponse.status}): ${resendError}`,
+          }),
+          { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
       }
     } else {
       console.warn("RESEND_API_KEY not configured — skipping email send");
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: "Votre demande a bien été enregistrée.",
+          email_error: "RESEND_API_KEY non configuré",
+        }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
     }
 
     return new Response(
