@@ -55,7 +55,7 @@ export default function Contact() {
       if (!response.ok) {
         const errText = await response.text().catch(() => "");
         console.error("DB insert failed:", response.status, errText);
-        throw new Error("Votre demande n'a pas pu être enregistrée. Veuillez réessayer.");
+        throw new Error(`Erreur (${response.status}): ${errText || "Réponse invalide"}`);
       }
 
       setSubmitState("success");

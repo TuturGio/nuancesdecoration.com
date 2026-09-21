@@ -56,9 +56,11 @@ function supabaseProxyPlugin(): Plugin {
       const path = rewrite(url.split('?')[0]);
       if (!path) return next();
 
-      // Collect request headers
+      // Collect request headers — strip hop-by-hop and host headers
+      const skipHeaders = new Set(['host', 'connection', 'keep-alive', 'transfer-encoding', 'upgrade', 'content-length']);
       const headers: Record<string, string> = {};
       for (const [key, value] of Object.entries(req.headers)) {
+        if (skipHeaders.has(key.toLowerCase())) continue;
         if (value) headers[key] = Array.isArray(value) ? value.join(', ') : value;
       }
 
@@ -74,11 +76,14 @@ function supabaseProxyPlugin(): Plugin {
 
       try {
         const targetUrl = SUPABASE_URL + path;
+        console.log('[supabase-proxy]', req.method, targetUrl);
         const resp = await fetch(targetUrl, {
           method: req.method || 'GET',
           headers,
           body: body,
         });
+
+        console.log('[supabase-proxy] Response:', resp.status);
 
         res.statusCode = resp.status;
         resp.headers.forEach((value, key) => {
