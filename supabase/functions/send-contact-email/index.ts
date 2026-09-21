@@ -7,7 +7,6 @@ const corsHeaders = {
 };
 
 const RECIPIENT_EMAIL = "contact@nuancesdecoration.com";
-const FALLBACK_RECIPIENT = "agiocanti@instagrume.com";
 
 const escapeHtml = (value: string) =>
   value.replace(
@@ -114,8 +113,8 @@ Deno.serve(async (req: Request) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Nuances Décoration <onboarding@resend.dev>",
-          to: FALLBACK_RECIPIENT,
+          from: "Nuances Décoration <contact@nuancesdecoration.com>",
+          to: RECIPIENT_EMAIL,
           reply_to: email,
           subject: `Nouvelle demande de rendez-vous — ${name}`,
           html: emailHtml,
