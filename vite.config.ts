@@ -25,7 +25,28 @@ function safeCopyPublicDir(): Plugin {
         // no public dir
       }
       try {
-        cpSync(join(outDir, 'index.html'), join(outDir, '404.html'));
+        const indexPath = join(outDir, 'index.html');
+        cpSync(indexPath, join(outDir, '404.html'));
+
+        const routes = [
+          'realisations/rideaux',
+          'realisations/voilages',
+          'realisations/stores',
+          'realisations/revetement-interieur',
+          'realisations/revetement-exterieur',
+          'realisations/banquettes',
+          'realisations/bateaux',
+          'histoire',
+          'contact',
+          'showroom',
+          'cgv',
+        ];
+
+        for (const route of routes) {
+          const routeDir = join(outDir, route);
+          mkdirSync(routeDir, { recursive: true });
+          cpSync(indexPath, join(routeDir, 'index.html'));
+        }
       } catch {
         // index.html not yet written
       }
