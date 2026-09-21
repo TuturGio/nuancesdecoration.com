@@ -55,7 +55,7 @@ export default function Footer() {
       </ul>
 
       <span className="font-['MaisonNeue'] font-thin text-[10px] md:text-[8px] tracking-[1.5px] text-white/70">
-        © 2026 Nuance Décoration
+        © 2026 Nuances Décoration
       </span>
     </footer>
   );
