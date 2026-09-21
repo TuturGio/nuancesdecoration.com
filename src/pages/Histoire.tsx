@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
+import Seo from '../components/Seo';
 
 export default function Histoire() {
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Notre histoire — Nuances Décoration"
+        description="Découvrez l'histoire de Nuances Décoration, atelier de confection textile sur mesure à Marseille, né de la rencontre entre Jeanne et Chloé autour d'une passion commune pour les belles matières et le travail artisanal."
+        path="/histoire"
+      />
       <section className="px-8 md:px-16 py-28 bg-[var(--linen)]">
         <div className="max-w-5xl mx-auto text-center">
           <span className="font-['MaisonNeue'] font-thin text-[9px] tracking-[4px] uppercase text-[var(--primary)] mb-6 block">

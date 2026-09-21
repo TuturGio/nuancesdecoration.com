@@ -1,6 +1,13 @@
+import Seo from '../components/Seo';
+
 export default function CGV() {
   return (
     <div className="min-h-screen bg-[var(--linen)]">
+      <Seo
+        title="Conditions générales de vente — Nuances Décoration"
+        description="Conditions générales de vente de Nuances Décoration : devis, commande, prise de mesures, prix, délais, réception, entretien, garanties et données personnelles."
+        path="/cgv"
+      />
       <section className="px-8 md:px-16 py-20 bg-[var(--linen)]">
         <div className="max-w-3xl mx-auto text-center">
           <span className="font-['MaisonNeue'] font-thin text-[9px] tracking-[4px] uppercase text-[var(--primary)] mb-6 block">

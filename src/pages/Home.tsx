@@ -1,6 +1,7 @@
 import { useState, useRef, TouchEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InstagramFeed from '../components/InstagramFeed';
+import Seo from '../components/Seo';
 
 const steps = [
   {
@@ -230,6 +231,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Nuances Décoration — Rideaux, voilages et textiles sur mesure à Marseille"
+        description="Nuances Décoration, atelier de confection textile sur mesure à Marseille. Rideaux, voilages, stores, banquettes, revêtements et sellerie nautique. Conseils, prise de mesures, fabrication locale et pose."
+        path="/"
+      />
       <section className="animate-[fadeUp_0.6s_0.1s_ease_both] hidden md:block">
         <div className="relative overflow-hidden">
           <div

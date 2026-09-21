@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Clock, Phone } from 'lucide-react';
+import Seo from '../components/Seo';
 
 export default function Showroom() {
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Notre showroom — Nuances Décoration, Marseille"
+        description="Découvrez notre showroom de 100 m² à Marseille : plus de 500 références de tissus, réalisations finies et conseils personnalisés. 63 Av. de Montredon, 13008 Marseille."
+        path="/showroom"
+      />
       {/* Bannière — texte gauche, visuel droite */}
       <section className="grid grid-cols-1 md:grid-cols-2 min-h-[60vh] bg-[var(--grege-p)]">
         <div className="flex flex-col justify-center px-8 py-16 md:px-16 md:py-20 order-2 md:order-1">

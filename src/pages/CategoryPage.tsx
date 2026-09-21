@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import CanvasImage from '../components/CanvasImage';
+import Seo from '../components/Seo';
 
 interface CategoryPageProps {
   title: string;
@@ -21,7 +22,13 @@ export default function CategoryPage({
   heroImage,
   extraContent,
 }: CategoryPageProps) {
+  const { pathname } = useLocation();
+  const seoTitle = `${title} sur mesure — Nuances Décoration`;
+  const seoDescription = description.slice(0, 155);
+
   return (
+    <>
+    <Seo title={seoTitle} description={seoDescription} path={pathname} />
     <div className="min-h-screen">
       <section className="grid grid-cols-1 md:grid-cols-2 min-h-[60vh] bg-[var(--grege-p)]">
         <div className="flex flex-col justify-center px-8 py-16 md:px-16 md:py-20 order-2 md:order-1">
@@ -99,5 +106,6 @@ export default function CategoryPage({
         </Link>
       </section>
     </div>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { MapPin, Phone, Mail, Clock, Info, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import Seo from "../components/Seo";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -81,6 +82,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Contact et rendez-vous — Nuances Décoration"
+        description="Prenez rendez-vous au showroom ou à domicile avec Nuances Décoration à Marseille. Rideaux, voilages, stores et textiles sur mesure. 63 Av. de Montredon, 13008 Marseille."
+        path="/contact"
+      />
       <section className="px-6 md:px-12 py-16 md:py-20 bg-[var(--linen)]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
